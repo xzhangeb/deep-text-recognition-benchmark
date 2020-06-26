@@ -52,11 +52,11 @@ def demo(opt):
             text_for_pred = torch.LongTensor(batch_size, opt.batch_max_length + 1).fill_(0).to(device)
 
             if 'CTC' in opt.Prediction:
-                preds = model(image, text_for_pred)
+                preds = model(image, text_for_pred) # (b, seq, index)
 
                 # Select max probabilty (greedy decoding) then decode index to character
-                preds_size = torch.IntTensor([preds.size(1)] * batch_size)
-                _, preds_index = preds.max(2)
+                preds_size = torch.IntTensor([preds.size(1)] * batch_size) #(seq, seq, ..., seq)
+                _, preds_index = preds.max(2) # (b, seq)
                 preds_index = preds_index.view(-1)
                 preds_str = converter.decode(preds_index.data, preds_size.data)
 

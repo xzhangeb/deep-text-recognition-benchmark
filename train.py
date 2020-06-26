@@ -92,7 +92,7 @@ def train(opt):
     # loss averager
     loss_avg = Averager()
 
-    # filter that only require gradient decent
+    # filter that only require gradient descent
     filtered_parameters = []
     params_num = []
     for p in filter(lambda p: p.requires_grad, model.parameters()):

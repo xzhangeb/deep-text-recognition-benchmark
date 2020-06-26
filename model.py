@@ -85,7 +85,7 @@ class Model(nn.Module):
 
         """ Prediction stage """
         if self.stages['Pred'] == 'CTC':
-            prediction = self.Prediction(contextual_feature.contiguous())
+            prediction = self.Prediction(contextual_feature.contiguous()) # (b, seq, char_index)
         else:
             prediction = self.Prediction(contextual_feature.contiguous(), text, is_train, batch_max_length=self.opt.batch_max_length)
 
